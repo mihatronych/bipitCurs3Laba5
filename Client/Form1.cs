@@ -19,6 +19,7 @@ namespace Client
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             using (var serv = new ServiceRef.Service1Client())
             {
                 serv.Open();
@@ -51,21 +52,29 @@ namespace Client
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (var serv = new ServiceRef.Service1Client())
+            try
             {
-                serv.Open();
-                var id = int.Parse(textBox1.Text);
-                var r_id = int.Parse(comboBox1.SelectedItem.ToString().Split(';')[0]);
-                var b_id = int.Parse(comboBox2.SelectedItem.ToString().Split(';')[0]);
-                DateTime dto = dateTimePicker1.Value;
-                DateTime dti = dateTimePicker2.Value;
-                serv.NewRec(id,
-                    r_id,
-                    b_id,
-                    dti,
-                    dto);
+                using (var serv = new ServiceRef.Service1Client())
+                {
+
+                    serv.Open();
+                    var id = int.Parse(textBox1.Text);
+                    var r_id = int.Parse(comboBox1.SelectedItem.ToString().Split(';')[0]);
+                    var b_id = int.Parse(comboBox2.SelectedItem.ToString().Split(';')[0]);
+                    DateTime dto = dateTimePicker1.Value;
+                    DateTime dti = dateTimePicker2.Value;
+                    serv.NewRec(id,
+                        r_id,
+                        b_id,
+                        dti,
+                        dto);
+                }
+                Form1_Load(sender, e);
             }
-            Form1_Load(sender,e);
+            catch
+            {
+                MessageBox.Show("Хост был выключен");
+            }
         }
     }
 }

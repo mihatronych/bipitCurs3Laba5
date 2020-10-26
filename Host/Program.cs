@@ -21,5 +21,10 @@ namespace Host
                 Console.ReadLine();
             }
         }
+
+        public static void PrintMessage(string str)
+        {
+            Console.WriteLine(str);
+        }
     }
 }

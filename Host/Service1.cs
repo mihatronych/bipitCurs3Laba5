@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-
+using Host;
 namespace WcfServiceLibrary
 {
     // ПРИМЕЧАНИЕ. Команду "Переименовать" в меню "Рефакторинг" можно использовать для одновременного изменения имени класса "Service1" в коде и файле конфигурации.
@@ -37,6 +37,7 @@ namespace WcfServiceLibrary
             ds.Tables["Readers"].Columns[11].ColumnName = "Последний срок приема";
             ds.Tables["Readers"].Columns[12].ColumnName = "Дней до просрочки";
             var str = ds.Tables["Readers"].Rows;
+            Program.PrintMessage($"[{DateTime.Now.ToLongTimeString()}-{DateTime.Now.ToShortDateString()} Success: Запрос журнала]");
             return ds;
         }
 
@@ -54,6 +55,7 @@ namespace WcfServiceLibrary
                 ds.Tables["Readers"].Columns[2].ColumnName = "Дата рождения";
                 ds.Tables["Readers"].Columns[3].ColumnName = "Паспорт";
             }
+            Program.PrintMessage($"[{DateTime.Now.ToLongTimeString()}-{DateTime.Now.ToShortDateString()} Success: Запрос таблицы читателей]");
             return ds;
         }
 
@@ -72,6 +74,7 @@ namespace WcfServiceLibrary
                 ds.Tables["Books"].Columns[3].ColumnName = "Дата издания";
                 ds.Tables["Books"].Columns[4].ColumnName = "Дата написания";
             }
+            Program.PrintMessage($"[{DateTime.Now.ToLongTimeString()}-{DateTime.Now.ToShortDateString()} Success: Запрос таблицы книг]");
             return ds;
         }
 
@@ -95,7 +98,7 @@ namespace WcfServiceLibrary
                 }
             }
 
-
+            Program.PrintMessage($"[{DateTime.Now.ToLongTimeString()}-{DateTime.Now.ToShortDateString()} Success: Добавление новой записи в журнал]");
             return str;
         }
 
